@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f4ec">
+  <meta name="description" content="Browse the menu and place an order at Khatu Shyam Vaishno Dhaba, Bathinda.">
+  <title>Digital Menu &amp; Order | Khatu Shyam Vaishno Dhaba</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="config.js"></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Khatu Shyam Vaishno Dhaba home">
+      <span class="brand-mark" aria-hidden="true"><span>KS</span></span>
+      <span class="brand-copy"><strong>Khatu Shyam</strong><small>VAISHNO DHABA · BATHINDA</small></span>
+    </a>
+    <span class="open-status"><i></i> ORDER ONLINE</span>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <div class="eyebrow"><span></span> GOOD FOOD, GOOD MOOD</div>
+        <h1 id="hero-title">A little taste<br>of <em>home.</em></h1>
+        <p>Fresh from our kitchen to your table.<br>Pick your favourites and order at the counter.</p>
+        <a class="browse-link" href="#menu">Explore the menu <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="sun"></div><div class="plate"><div class="plate-inner"><span class="leaf leaf-one"></span><span class="leaf leaf-two"></span><span class="leaf leaf-three"></span><span class="food-dot dot-one"></span><span class="food-dot dot-two"></span><span class="food-dot dot-three"></span><span class="food-dot dot-four"></span><span class="food-dot dot-five"></span></div></div>
+        <span class="art-note">MADE WITH<br>LOVE ♡</span>
+      </div>
+      <div class="hero-stamp"><span>FRESH</span><span>·</span><span>LOCAL</span><span>·</span><span>DELICIOUS</span></div>
+    </section>
+
+    <section class="menu-section" id="menu" aria-labelledby="menu-title">
+      <div class="section-heading">
+        <div><div class="eyebrow"><span></span> FROM OUR KITCHEN</div><h2 id="menu-title">The menu<span class="heading-period">.</span></h2></div>
+        <span class="dish-count" id="dish-count">Loading menu…</span>
+      </div>
+      <div class="menu-tools">
+        <label class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.5 4.5"></path></svg><input id="search" type="search" placeholder="Find your favourite…" autocomplete="off" aria-label="Search dishes"><kbd>⌕</kbd></label>
+        <div class="category-strip" id="categories" aria-label="Filter by category"></div>
+      </div>
+      <div id="menu-message" class="notice" role="status" hidden></div>
+      <div id="menu-grid" class="menu-grid" aria-live="polite"></div>
+      <div id="empty-results" class="empty-state" hidden><span>☹</span><strong>No dishes found</strong><p>Try another search or category.</p></div>
+    </section>
+
+    <aside class="order-card" aria-labelledby="order-title">
+      <div class="order-top"><div><div class="eyebrow"><span></span> YOUR ORDER</div><h2 id="order-title">Ready when you are<span class="heading-period">.</span></h2></div><span class="bag-icon" aria-hidden="true">↗</span></div>
+      <div class="order-stats"><div><span id="selected-count">0</span><small>DISHES</small></div><div><span id="total-quantity">0</span><small>ITEMS</small></div><div class="amount-stat"><span id="estimated-total">₹0</span><small>ESTIMATED TOTAL</small></div></div>
+      <form id="order-form" novalidate>
+        <div class="customer-fields"><label>YOUR NAME<input id="customer-name" name="customer_name" type="text" placeholder="e.g. Gurpreet Singh" autocomplete="name" maxlength="100" required></label><label>PHONE NUMBER<div class="phone-input"><span>+91</span><input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="98765 43210" maxlength="10" required></div></label></div>
+        <div id="form-error" class="form-error" role="alert" hidden></div>
+        <button id="submit-order" class="submit-button" type="submit"><span>Place my order</span><span aria-hidden="true">→</span></button>
+        <p class="pay-note">Final amount confirmed at the cashier · Pay at the counter</p>
+      </form>
+      <div id="success-panel" class="success-panel" role="status" hidden><span class="success-check">✓</span><div class="eyebrow"><span></span> ORDER RECEIVED</div><h3>Thank you!<br>Your food is on its way.</h3><div class="success-details"><div><small>ORDER TOKEN</small><strong id="order-token">—</strong></div><div><small>PAYABLE AMOUNT</small><strong id="final-amount">—</strong></div></div><p>Please pay at the cashier.</p><button id="new-order" class="text-button" type="button">Start a new order <span>↗</span></button></div>
+    </aside>
+  </main>
+  <footer><span class="footer-brand">KHATU SHYAM VAISHNO DHABA</span><span>Made with care in Bathinda, Punjab</span><a href="#top">BACK TO TOP ↑</a></footer>
+</body>
+</html>
