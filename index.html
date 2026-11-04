@@ -54,13 +54,35 @@
     <aside class="order-card" aria-labelledby="order-title">
       <div class="order-top"><div><div class="eyebrow"><span></span> YOUR ORDER</div><h2 id="order-title">Ready when you are<span class="heading-period">.</span></h2></div><span class="bag-icon" aria-hidden="true">↗</span></div>
       <div class="order-stats"><div><span id="selected-count">0</span><small>DISHES</small></div><div><span id="total-quantity">0</span><small>ITEMS</small></div><div class="amount-stat"><span id="estimated-total">₹0</span><small>ESTIMATED TOTAL</small></div></div>
+      <section class="cart-review" aria-labelledby="cart-review-title">
+        <h3 id="cart-review-title">Review your order</h3>
+        <p id="cart-empty">Your selected dishes will appear here.</p>
+        <ul id="cart-items" aria-live="polite"></ul>
+      </section>
       <form id="order-form" novalidate>
-        <div class="customer-fields"><label>YOUR NAME<input id="customer-name" name="customer_name" type="text" placeholder="e.g. Gurpreet Singh" autocomplete="name" maxlength="100" required></label><label>PHONE NUMBER<div class="phone-input"><span>+91</span><input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="98765 43210" maxlength="10" required></div></label></div>
+        <div class="customer-fields"><label>YOUR NAME<input id="customer-name" name="customer_name" type="text" placeholder="e.g. Gurpreet Singh" autocomplete="name" maxlength="100" required></label><label>PHONE NUMBER<div class="phone-input"><span>+91</span><input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="98765 43210" maxlength="10" pattern="[6-9][0-9]{9}" required></div></label></div>
         <div id="form-error" class="form-error" role="alert" hidden></div>
+        <p id="submit-status" class="submit-status" role="status" hidden></p>
         <button id="submit-order" class="submit-button" type="submit"><span>Place my order</span><span aria-hidden="true">→</span></button>
         <p class="pay-note">Final amount confirmed at the cashier · Pay at the counter</p>
       </form>
-      <div id="success-panel" class="success-panel" role="status" hidden><span class="success-check">✓</span><div class="eyebrow"><span></span> ORDER RECEIVED</div><h3>Thank you!<br>Your food is on its way.</h3><div class="success-details"><div><small>ORDER TOKEN</small><strong id="order-token">—</strong></div><div><small>PAYABLE AMOUNT</small><strong id="final-amount">—</strong></div></div><p>Please pay at the cashier.</p><button id="new-order" class="text-button" type="button">Start a new order <span>↗</span></button></div>
+      <div id="success-panel" class="success-panel" role="status" aria-live="polite" hidden>
+        <span class="success-check" aria-hidden="true">✓</span>
+        <div class="eyebrow"><span></span> ORDER RECEIVED</div>
+        <h3>Thank you for your order!</h3>
+        <p class="confirmation-intro">Your order has been received successfully.</p>
+        <div class="success-details">
+          <div><small>ORDER TOKEN</small><strong id="order-token">—</strong></div>
+          <div><small>TOTAL AMOUNT</small><strong id="final-amount">—</strong></div>
+          <div><small>PAYMENT STATUS</small><strong id="payment-status">—</strong></div>
+        </div>
+        <div class="confirmation-summary">
+          <h4>ORDER SUMMARY</h4>
+          <ul id="confirmation-items"></ul>
+        </div>
+        <p class="cashier-instruction">Your order has been received. Please proceed to the cashier, share your token and complete your payment.</p>
+        <button id="new-order" class="text-button" type="button">Start a new order <span>↗</span></button>
+      </div>
     </aside>
   </main>
   <footer><span class="footer-brand">KHATU SHYAM VAISHNO DHABA</span><span>Made with care in Bathinda, Punjab</span><a href="#top">BACK TO TOP ↑</a></footer>

@@ -1,17 +1,53 @@
-# Khatu Shyam Vaishno Dhaba ordering page
+# Khatu Shyam Vaishno Dhaba ordering website
 
-Static, mobile-first HTML/CSS/vanilla JavaScript frontend. No build step or dependencies are required. The page reads menu rows from a public n8n endpoint and submits the selected dish names and quantities to the supplied order workflow.
+Static, mobile-first ordering page built with HTML, CSS, and vanilla JavaScript. It has no build step or external runtime dependencies.
 
-## Connect the existing menu
+## Development n8n endpoints
 
-The order webhook URL was supplied, but a menu-read endpoint was not. Add a GET webhook in n8n that reads the existing **Menu** tab and returns JSON rows containing `Category`, `Item Name`, `Price`, and `Available`. The endpoint should permit browser CORS requests from the GitHub Pages origin. Then set `menuUrl` in `config.js` to its production URL. Supported responses are an array of rows, or an object with an array in `data`, `menu`, or `items`.
+The public URLs are set in `config.js`:
 
-The frontend deliberately does not contain a copy of the menu: it must use the live sheet through n8n, so dish names, prices, and availability stay authoritative. `config.js` contains only public endpoint URLs. Keep all Google credentials and private keys inside n8n.
+- Menu GET: `https://lovedeep-automates.app.n8n.cloud/webhook/21593612-35d3-4aae-b021-b66c96323ad7`
+- Order POST: `https://lovedeep-automates.app.n8n.cloud/webhook/8f0f5ebc-c691-496f-9a15-b6a89b540409`
 
-## Order response
+These production-style webhook URLs belong to the three DEV workflows and use only the `Khatu Shyam Development Test` spreadsheet. Activate the DEV workflows only while testing. The production workflows and production sheet remain untouched. `config.js` contains public endpoint URLs only; keep credentials and private keys inside n8n.
 
-The page POSTs the documented JSON shape to `https://khatu-shyam-n8n.app.n8n.cloud/webhook/place-customer-order`. Configure the n8n Respond to Webhook node for JSON and browser CORS. For the confirmation screen to show the actual order details, its successful response should include an order token (`order_token` or `token`) and final amount (`final_amount`, `total`, or `total_amount`). If amount is omitted, the browser displays its estimate; the workflow remains authoritative for the final payable amount.
+## Order request and confirmation response
 
-## Run and host
+The website keeps the existing request body:
 
-Open `index.html` directly for the static interface, or serve the `outputs/` folder with any local static server. GitHub Pages can publish the contents of this folder after the menu endpoint is configured and the live flow is checked. No secrets should be added to this folder.
+```json
+{
+  "customer_name": "Customer Name",
+  "phone": "9876543210",
+  "items": [
+    { "item_name": "Dal Makhani", "quantity": 1 }
+  ]
+}
+```
+
+The frontend only displays successful confirmation for an HTTP-success response with this JSON contract:
+
+```json
+{
+  "success": true,
+  "order_token": "KSV-123456",
+  "total_amount": 480,
+  "payment_status": "Pending"
+}
+```
+
+`total_amount` must be a finite JSON number, `order_token` a non-empty string, and `payment_status` a non-empty string. The frontend also requires HTTP success and `success: true`. It never creates a token or substitutes the estimated cart total as the confirmed amount. A generic webhook response such as `Workflow was started` is treated as an unconfirmed order and prompts the customer to check with the cashier before trying again.
+
+The n8n customer-order workflow must return that JSON only after durable order and line-item persistence succeeds. Do not publish the site until the dummy-order lifecycle has passed.
+
+## Run locally
+
+From the repository root, run Python's built-in server:
+
+```powershell
+python -m http.server 8000 --bind 127.0.0.1
+```
+
+Open `http://127.0.0.1:8000/`. A local HTTP origin is preferable to opening the page with `file://` for testing cross-origin requests.
+
+This checkout is a development candidate. Keep it on a development branch until the backend endpoints and end-to-end dummy-order tests are verified. Do not merge to `main`, push to the production deployment branch, publish GitHub Pages, or use the production page for dummy orders without explicit approval.

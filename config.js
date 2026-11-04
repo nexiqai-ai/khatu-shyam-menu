@@ -1,6 +1,6 @@
 /* Public frontend settings only. Never place credentials or access tokens here. */
 window.DHABA_CONFIG = {
-  // Public n8n GET endpoint that reads the existing Menu tab.
-  menuUrl: "https://lovedeep.app.n8n.cloud/webhook/menu",
-  orderUrl: "https://lovedeep.app.n8n.cloud/webhook/d0be8737-5cc8-43b8-9733-f9ec7202787b"
+  // DEV workflows read and write only the Khatu Shyam Development Test sheet.
+  menuUrl: "https://lovedeep-automates.app.n8n.cloud/webhook/21593612-35d3-4aae-b021-b66c96323ad7",
+  orderUrl: "https://lovedeep-automates.app.n8n.cloud/webhook/8f0f5ebc-c691-496f-9a15-b6a89b540409"
 };
